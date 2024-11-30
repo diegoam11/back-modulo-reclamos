@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "67beab6a-8c70-45d0-bb78-c3cbda7b01c2",
+		"name": "Quejas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39972295"
+	},
+	"item": [
+		{
+			"name": "Get Quejas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/quejas/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"quejas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Quejas",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.globals.set(\"today\", moment().format(\"YYYY-MM-DD\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_cliente\": 3,\r\n    \"tipo_bien_contratado\": 1,\r\n    \"orden_compra\": 12345,\r\n    \"codigo_producto\": 12345,\r\n    \"fecha_compra\": \"2024-10-11\",\r\n    \"forma_respuesta\": \"correo\",\r\n    \"fecha_queja\": \"2024-11-25\",\r\n    \"detalle_queja\": \"Queja detallada\",\r\n    \"peticion_cliente\": \"Solicito solución inmediata\",\r\n    \"acciones_tomadas\": \"\",\r\n    \"estado\": 0,\r\n    \"fecha_respuesta\": null,\r\n    \"fecha_limite\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/quejas/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"quejas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Quejas Cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/quejas/cliente/:id_cliente",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"quejas",
+						"cliente",
+						":id_cliente"
+					],
+					"variable": [
+						{
+							"key": "id_cliente",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Quejas ID_Quejas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/quejas/:id_queja",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"quejas",
+						":id_queja"
+					],
+					"variable": [
+						{
+							"key": "id_queja",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

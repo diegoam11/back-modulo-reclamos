@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "347327df-fe4c-4154-8357-ab367c37e82c",
+		"name": "Solicitudes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39972295"
+	},
+	"item": [
+		{
+			"name": "Get Solicitudes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/solicitudes/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Solicitudes",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_cliente\": 3,\r\n    \"tipo_bien_contratado\": 1,\r\n    \"orden_compra\": 1234,\r\n    \"codigo_producto\": 1234,\r\n    \"forma_respuesta\": \"correo\",\r\n    \"fecha_solicitud\": \"2024-11-20\",\r\n    \"detalle_solicitud\": \"Solicitud detallada\",\r\n    \"peticion_cliente\": \"Solicito detalles de mis últimas compras\",\r\n    \"acciones_tomadas\": \"\",\r\n    \"estado\": 0,\r\n    \"fecha_respuesta\": null,\r\n    \"fecha_limite\": null,\r\n    \"id_tipo_solicitud\": 1\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/solicitudes/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Solicitudes Cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/solicitudes/cliente/:id_cliente",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						"cliente",
+						":id_cliente"
+					],
+					"variable": [
+						{
+							"key": "id_cliente",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Solicitudes Tipo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/solicitudes/tipo/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						"tipo",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

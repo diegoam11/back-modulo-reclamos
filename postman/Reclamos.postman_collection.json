@@ -1,0 +1,123 @@
+{
+	"info": {
+		"_postman_id": "f39a8912-2ef9-4bb8-846c-bde75a243cec",
+		"name": "Reclamos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39972295"
+	},
+	"item": [
+		{
+			"name": "Get Reclamos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reclamos/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Reclamos",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id_cliente\": 3,\r\n    \"tipo_bien_contratado\": 1,\r\n    \"orden_compra\": 101,\r\n    \"codigo_producto\": 657257181,\r\n    \"fecha_compra\": \"2024-11-24\",\r\n    \"forma_respuesta\": \"correo\",\r\n    \"fecha_reclamo\": \"2024-11-24\",\r\n    \"detalle_reclamo\": \"No coincide el precio\",\r\n    \"monto_reclamado\": \"200.00\",\r\n    \"peticion_cliente\": \"Quiero que me devuelvan la diferencia\",\r\n    \"acciones_tomadas\": \"\",\r\n    \"estado\": 1,\r\n    \"fecha_respuesta\": null,\r\n    \"fecha_limite\": null,\r\n    \"id_tipo_reclamo\": 1\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/reclamos/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reclamos Cliente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reclamos/cliente/:id_cliente",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						"cliente",
+						":id_cliente"
+					],
+					"variable": [
+						{
+							"key": "id_cliente",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reclamos Tipo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reclamos/tipo/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						"tipo",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reclamos ID_Reclamos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reclamos/:id_reclamo",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						":id_reclamo"
+					],
+					"variable": [
+						{
+							"key": "id_reclamo",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
