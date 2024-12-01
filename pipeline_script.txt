@@ -2,10 +2,12 @@ pipeline {
     agent any
 
     environment {
-        SCANNER_HOME = tool 'sonar-scanner'
-        SONAR_TOKEN = 'squ_a40cec4a5914e9a99a1f7b5510c4b710ec68452d'
-        ZAP_JAR_PATH = '"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap-2.15.0.jar"'
-        ZAP_API_KEY = 'f4cea9sq4spjo6la4vca7l41ht'
+        SCANNER_HOME = tool 'sonar-scanner' 
+        SONAR_TOKEN = 'su_token_sonar' // Ingrese su token; se puede crear en Administration>Security>Users
+        ZAP_JAR_PATH = "${env.ZAP_HOME}\\zap-2.15.0.jar" // Ruta configurable
+        ZAP_API_KEY = 'su_token_zap' // Ingrese su token API; se puede encontrar en Tools>Options>API
+        PYTHON_PATH = "C:\\Users\\alex\\AppData\\Local\\Programs\\Python\\Python311" // Ruta configurable para Python
+        DJANGO_MANAGE_PATH = "${env.PYTHON_PATH}\\Scripts\\activate.bat"
     }
 
     stages {
@@ -37,12 +39,12 @@ pipeline {
         stage('Setup and Install Dependencies') {
             steps {
                 echo 'Setting up virtual environment and installing dependencies...'
-                bat '''
-                    C:\\Users\\alex\\AppData\\Local\\Programs\\Python\\Python311\\python.exe -m venv venv
+                bat """
+                    ${env.PYTHON_PATH}\\python.exe -m venv venv
                     call venv\\Scripts\\activate.bat
                     python -m pip install --upgrade pip setuptools wheel
                     python -m pip install -r requirements.txt
-                '''
+                """
             }
         }
 
@@ -87,7 +89,7 @@ pipeline {
                 script {
                     bat 'mkdir zap_report'
                     bat """
-                        java -jar ${ZAP_JAR_PATH} -cmd -quickurl http://127.0.0.1:8000 -quickout zap_report/zap-report.html -nostdout -port 8090
+                        java -jar ${env.ZAP_JAR_PATH} -cmd -quickurl http://127.0.0.1:8000 -quickout zap_report/zap-report.html -nostdout -port 8090
                     """
                     bat 'dir zap_report'
                 }
