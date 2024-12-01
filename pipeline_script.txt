@@ -1,0 +1,162 @@
+pipeline {
+    agent any
+
+    environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+        SONAR_TOKEN = 'squ_a40cec4a5914e9a99a1f7b5510c4b710ec68452d'
+        ZAP_JAR_PATH = '"C:\\Program Files\\ZAP\\Zed Attack Proxy\\zap-2.15.0.jar"'
+        ZAP_API_KEY = 'f4cea9sq4spjo6la4vca7l41ht'
+    }
+
+    stages {
+        stage('Git Checkout') {
+            steps {
+                git branch: 'develop', url: 'https://github.com/diegoam11/back-modulo-reclamos'
+            }
+        }
+
+        stage('SonarQube Static Analysis') {
+            steps {
+                script {
+                    bat """
+                        ${SCANNER_HOME}\\bin\\sonar-scanner ^
+                        -Dsonar.projectKey=back-modulo-reclamos ^
+                        -Dsonar.projectName=back-modulo-reclamos ^
+                        -Dsonar.sources=. ^
+                        -Dsonar.python.version=3.12 ^
+                        -Dsonar.sourceEncoding=UTF-8 ^
+                        -Dsonar.language=py ^
+                        -Dsonar.exclusions=tests/**,venv/**,**/__pycache__/**,setup.py ^
+                        -Dsonar.host.url=http://localhost:9000 ^
+                        -Dsonar.login=%SONAR_TOKEN%
+                    """
+                }
+            }
+        }
+
+        stage('Setup and Install Dependencies') {
+            steps {
+                echo 'Setting up virtual environment and installing dependencies...'
+                bat '''
+                    C:\\Users\\alex\\AppData\\Local\\Programs\\Python\\Python311\\python.exe -m venv venv
+                    call venv\\Scripts\\activate.bat
+                    python -m pip install --upgrade pip setuptools wheel
+                    python -m pip install -r requirements.txt
+                '''
+            }
+        }
+
+        stage('Check Django Installation') {
+            steps {
+                echo 'Checking if Django is installed...'
+                bat 'call venv\\Scripts\\activate.bat && python -m pip show django || echo Django is not installed'
+            }
+        }
+
+        stage('Start Django Server') {
+            steps {
+                echo 'Starting Django server...'
+                bat 'call venv\\Scripts\\activate.bat && start python manage.py runserver'
+            }
+        }
+
+        stage('Wait for Django Server') {
+            steps {
+                echo 'Waiting for Django server to start...'
+                script {
+                    def serverReady = waitForServer(30)
+                    if (!serverReady) {
+                        error "Django server did not start in time."
+                    }
+                }
+            }
+        }
+
+        stage('Run Postman Tests') {
+            steps {
+                script {
+                    ['Quejas', 'Reclamos', 'Solicitudes'].each { collection ->
+                        bat "newman run postman/${collection}.postman_collection.json --globals postman/workspace.postman_globals.json --reporters cli,html --reporter-html-export reporte_resultados_${collection}.postman_collection.json.html"
+                    }
+                }
+            }
+        }
+
+        stage('ZAP Security Scan') {
+            steps {
+                script {
+                    bat 'mkdir zap_report'
+                    bat """
+                        java -jar ${ZAP_JAR_PATH} -cmd -quickurl http://127.0.0.1:8000 -quickout zap_report/zap-report.html -nostdout -port 8090
+                    """
+                    bat 'dir zap_report'
+                }
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'zap_report/zap-report.html', allowEmptyArchive: true
+                }
+            }
+        }
+
+        stage('Performance Test and Archive Results') {
+            steps {
+                script {
+                    // Ejecutar Locust con el archivo performance_test.py en modo headless
+                    bat 'locust -f performance_test.py --host=http://127.0.0.1:8000 --headless -u 10 -r 1 --run-time 1m --csv=locust_results'
+                }
+        
+                // Archivar los resultados generados por Locust en formato CSV
+                archiveArtifacts artifacts: '**/locust_results*.csv', allowEmptyArchive: true
+            }
+        }
+
+        stage('Stop Django Server') {
+            steps {
+                echo 'Stopping Django server...'
+                bat 'taskkill /F /IM python.exe'
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                echo 'Running unit tests...'
+                bat 'call venv\\Scripts\\activate.bat && pytest --maxfail=1 --disable-warnings -q'
+            }
+        }
+        
+        stage('Post Actions') {
+            steps {
+                echo 'Archiving artifacts...'
+                archiveArtifacts 'reporte_resultados_*.html'
+                cleanWs()
+            }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'reporte_resultados_*.html, zap-report.html', allowEmptyArchive: true
+            cleanWs()
+        }
+    }
+}
+
+def waitForServer(int maxAttempts) {
+    def attempt = 0
+    def serverReady = false
+    while (attempt < maxAttempts) {
+        try {
+            def response = bat(script: 'curl --silent --head http://127.0.0.1:8000', returnStatus: true)
+            if (response == 0) {
+                serverReady = true
+                break
+            }
+        } catch (Exception e) {
+            echo "Attempt ${attempt + 1}: Django server not ready yet."
+        }
+        sleep(time: 10, unit: 'SECONDS')
+        attempt++
+    }
+    return serverReady
+}
