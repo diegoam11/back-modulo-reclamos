@@ -118,6 +118,55 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Reclamos Cliente Inexistente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reclamos/cliente/:id_cliente",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						"cliente",
+						":id_cliente"
+					],
+					"variable": [
+						{
+							"key": "id_cliente",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Reclamos ID_Reclamos Inexistente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/reclamos/:id_reclamo",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"reclamos",
+						":id_reclamo"
+					],
+					"variable": [
+						{
+							"key": "id_reclamo",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

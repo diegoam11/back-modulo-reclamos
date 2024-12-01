@@ -94,6 +94,79 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Get Solicitudes ID_Solicitud",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/solicitudes/:id_solicitud",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						":id_solicitud"
+					],
+					"variable": [
+						{
+							"key": "id_solicitud",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Solicitudes Cliente Inexistente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/solicitudes/cliente/:id_cliente",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						"cliente",
+						":id_cliente"
+					],
+					"variable": [
+						{
+							"key": "id_cliente",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Solicitudes ID_Solicitud Inexistente",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/solicitudes/:id_solicitud",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"solicitudes",
+						":id_solicitud"
+					],
+					"variable": [
+						{
+							"key": "id_solicitud",
+							"value": "-1"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
