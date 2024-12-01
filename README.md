@@ -125,31 +125,31 @@ El pipeline de Jenkins está estructurado en varias etapas, cada una con una fun
 
 El script de Jenkins es altamente **personalizable** y permite ajustar diversas configuraciones para adaptarlo a tus necesidades específicas. A continuación se describe cómo personalizar algunas de las variables clave:
 1. **SONAR_TOKEN**: Token de autenticación para SonarQube.
-```bash
+```groovy
 SONAR_TOKEN = 'su_token_sonar'  // Se puede crear en Administration > Security > Users 
 ```
 Este token es necesario para autenticar el análisis de código en SonarQube. Asegúrate de crear un token en la sección correspondiente de SonarQube y reemplazar el valor de la variable.
 
 2. **ZAP_JAR_PATH**: Ruta del archivo JAR de ZAP (Zed Attack Proxy).
-```bash
+```groovy
 ZAP_JAR_PATH = "${env.ZAP_HOME}\\zap-2.15.0.jar"  // Ruta configurable
 ```
 Si ZAP está instalado en una ubicación diferente, asegúrate de actualizar esta ruta con la ubicación correcta del archivo zap-2.15.0.jar en tu sistema.
 
 3. **ZAP_API_KEY**: Clave API de ZAP.
-```bash
+```groovy
 ZAP_API_KEY = 'su_token_zap'  // Se puede encontrar en Tools > Options > API
 ```
 Este es el token de API que ZAP usa para realizar el escaneo de seguridad. Puedes generar o copiar este token desde la interfaz de ZAP en la sección de opciones de API.
 
 4. **PYTHON_PATH**: Ruta donde Python está instalado en tu sistema.
-```bash
+```groovy
 PYTHON_PATH = "ruta_python"  // Ruta configurable para Python
 ```
 Si tienes Python instalado en una ubicación diferente, modifica esta ruta para reflejar la instalación correcta en tu máquina.
 
 5. **DJANGO_MANAGE_PATH**: Ruta al script de activación del entorno virtual de Django.
-```bash
+```groovy
 DJANGO_MANAGE_PATH = "${env.PYTHON_PATH}\\Scripts\\activate.bat"
 ```
 Asegúrate de que esta ruta apunte correctamente al archivo de activación del entorno virtual de Python que usas para tu proyecto Django.
