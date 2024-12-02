@@ -17,6 +17,14 @@ python manage.py runserver
 # Docs: http://127.0.0.1:8000/docs/
 ```
 
+# Para correr las pruebas unitarias:
+```bash
+# Solo es necesario ejecutar: 
+python -m venv venv
+# en la raíz del proyecto
+```
+
+
 # Para correr los tests de rendimiento:
 
 ```bash
