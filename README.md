@@ -20,7 +20,7 @@ python manage.py runserver
 # Para correr las pruebas unitarias:
 ```bash
 # Solo es necesario ejecutar: 
-python -m venv venv
+pytest -rP 
 # en la raíz del proyecto
 ```
 
