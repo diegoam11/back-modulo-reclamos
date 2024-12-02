@@ -19,9 +19,19 @@ python manage.py runserver
 
 # Para correr las pruebas unitarias:
 ```bash
-# Solo es necesario ejecutar: 
+# 1. Verificar la configuración del archivo pytest.ini:
+
+[pytest]
+DJANGO_SETTINGS_MODULE = core.settings
+python_files = test_*.py
+
+#  Este archivo configura:
+# 	El módulo de configuración, en este caso core.settings
+#  	El patrón que tendrán los nombres de los archivos para los test, en este caso: test_*.py
+
+# 2. Solo es necesario ejecutar: 
 pytest -rP 
-# en la raíz del proyecto
+#    en la raíz del proyecto
 ```
 
 
