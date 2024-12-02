@@ -1,4 +1,11 @@
 # PROYECTO FINAL DE V&V - G8
+## Integrantes
+- **[Diego Alvarez More]**
+- **[Diego André Falla Gallegos]**
+- **[Alexandru Andrei Dinca]**
+- **[Sergio Antonio Callan Perez]**
+- **[Rafael Alexander Bravo Pimentel]**
+- **[Oscar Isaac Laguna Santa Cruz]**
 
 ## Descripción del Proyecto
 
