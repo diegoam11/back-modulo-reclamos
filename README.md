@@ -1,3 +1,15 @@
+# PROYECTO FINAL DE V&V - G8
+
+## Descripción del Proyecto
+
+Este proyecto implementa un sistema de gestión de **reclamos, quejas y solicitudes** para los usuarios de una empresa de telecomunicaciones, desarrollado utilizando Django Rest Framework.  
+
+El principal objetivo del proyecto es aplicar los conocimientos adquiridos en el curso de **Verificación y Validación de Software**, garantizando que la aplicación cumpla con los estándares de calidad, seguridad y desempeño requeridos.  
+
+A través del desarrollo del sistema, se integran técnicas de pruebas unitarias, pruebas de rendimiento, análisis estático de código y pruebas de seguridad. Adicionalmente, se automatizan procesos mediante la implementación de un pipeline en Jenkins, lo que asegura un flujo de trabajo eficiente y confiable.  
+
+La aplicación permite a los usuarios realizar operaciones CRUD para gestionar reclamos, quejas y solicitudes, además de interactuar con endpoints RESTful que han sido probados exhaustivamente. Para las pruebas de seguridad y rendimiento se utilizan herramientas especializadas como **ZAP** y **Locust**, mientras que la calidad del código es evaluada mediante **SonarQube**.
+
 # Para correr el proyecto:
 
 ```bash
