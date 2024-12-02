@@ -1,6 +1,5 @@
 from django.db import models
 from decimal import Decimal
-#from strategies.strategies import ResponseStrategy
 
 class Reclamo(models.Model):
     id_reclamo = models.AutoField(primary_key=True)
