@@ -1,4 +1,4 @@
-# PROYECTO FINAL DE V&V - G8
+# PROYECTO FINAL DE V&V - GRUPO 8
 ## Integrantes
 - **Diego Alvarez More**
 - **Diego André Falla Gallegos**
